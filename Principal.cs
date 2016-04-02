@@ -11,21 +11,16 @@ using System.Threading.Tasks;
 using EasyCrypt;
 
 
-namespace SensibleInfo
+namespace EasyCrypt
 {
 	public partial class Principal : Form
 	{
-		private const int version = 101;
+		
 
-		public const string APP_EXTENSION = ".ssi";
-		private const string AVISO_CLAVE = "RECUERDE: Si olvida la contraseña no podrá recuperar sus datos.";
-		private const string AVISO_CIFRADO_EXITO = "Archivos cifrados con éxito.";
-		private const string AVISO_DESCIFRADO_EXITO = "Archivos cifrados con éxito.";
-		private const string FICHERO_ACTUALIZADOR = "actualizador.exe";
-		private const string FICHERO_VERSION_ACTUAL = "update.txt";
-		private const string URL_ACTUALIZACIONES = "http://danielumpierrez.es/";
-		private const string URL_ACTUALIZADOR = URL_ACTUALIZACIONES + FICHERO_ACTUALIZADOR;
-		private const string URL_VERSION_ACTUAL = URL_ACTUALIZACIONES + FICHERO_VERSION_ACTUAL;
+
+
+
+
 
 		private ImageList lstImagenes = new ImageList();
 		private StringBuilder strFallos = new StringBuilder();
@@ -49,7 +44,7 @@ namespace SensibleInfo
 			dlgFicheros.InitialDirectory = SysFicheros.RUTA_MIPC;
 			lstImagenes.ImageSize = new Size(48, 48);
 			lstImagenes.ColorDepth = ColorDepth.Depth32Bit;
-			lstImagenes.Images.Add(APP_EXTENSION, this.Icon);
+			lstImagenes.Images.Add(Constantes.APP_EXTENSION, this.Icon);
 			lstFicheros.View = View.LargeIcon;
 			lstFicheros.LargeImageList = lstImagenes;
 		}
@@ -85,7 +80,7 @@ namespace SensibleInfo
 					// si la accion es cifrar
 					if (modoCifrado()) {
 						// mientras no tenga extensión .cet (ya que es un archivo cifrado)
-						if (infoFichero.Extension != APP_EXTENSION) {
+						if (infoFichero.Extension != Constantes.APP_EXTENSION) {
 							// si no tenemos el icono en nuestra lista de par de valores extension / icono (lstImagenes)
 							if (!lstImagenes.Images.ContainsKey(infoFichero.Extension)) {
 								icono = System.Drawing.Icon.ExtractAssociatedIcon(infoFichero.FullName);
@@ -95,7 +90,7 @@ namespace SensibleInfo
 							lstFicheros.Items.Insert(lstFicheros.Items.Count, infoFichero.FullName, infoFichero.Name, infoFichero.Extension);
 						}
 					} else {
-						if (infoFichero.Extension == APP_EXTENSION) {
+						if (infoFichero.Extension == Constantes.APP_EXTENSION) {
 							icono = this.Icon;
 							if (!lstImagenes.Images.ContainsKey(infoFichero.Extension))
 								lstImagenes.Images.Add(infoFichero.Extension, icono);
@@ -118,7 +113,7 @@ namespace SensibleInfo
 			// Ficheros por la linea de comandos como argumentos (desde menu contextual)
 			if (Environment.GetCommandLineArgs().Length == 2) {
 				string fichero = Environment.GetCommandLineArgs()[1];
-				if (fichero.Contains(APP_EXTENSION)) {
+				if (fichero.Contains(Constantes.APP_EXTENSION)) {
 					cmbAccion.SelectedIndex = 1;
 					txtClave.Text = dialogos.password("Introduzca la clave: ", "Descifrar");
 					if (txtClave.Text != null) {
@@ -139,14 +134,14 @@ namespace SensibleInfo
 				}
 				this.Close();
 			}
-			sysFicheros.borrarFichero(sysFicheros.combinarRuta(SysFicheros.RUTA_DIR_APP, FICHERO_ACTUALIZADOR));
+			sysFicheros.borrarFichero(sysFicheros.combinarRuta(SysFicheros.RUTA_DIR_APP, Constantes.FICHERO_ACTUALIZADOR));
 			new Task(comprobarActualizaciones).Start();
 		}
 
 		private void cmbAccion_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			if (!modoCifrado()) {
-				dlgFicheros.Filter = "Ficheros cifrados con SensibleInfo|*" + APP_EXTENSION;
+				dlgFicheros.Filter = "Ficheros cifrados con SensibleInfo|*" + Constantes.APP_EXTENSION;
 			} else {
 				dlgFicheros.Filter = "Todos los ficheros|*.*";
 			}
@@ -178,7 +173,7 @@ namespace SensibleInfo
 
 			if (hayClave() && modoCifrado()) {
 				lblBarraAvisoClave.ForeColor = Color.DarkRed;
-				lblBarraAvisoClave.Text = AVISO_CLAVE;
+				lblBarraAvisoClave.Text = Textos.AVISO_CLAVE;
 			}
 			if (!hayClave()) {
 				lblBarraAvisoClave.Text = "";
@@ -271,12 +266,10 @@ namespace SensibleInfo
 				foreach (ListViewItem elemento in ficheros) {
 					if (modoCifrado()) {
 						Cifrador.CifrarAES(elemento.Name, txtClave.Text);
-						if (File.Exists(elemento.Name + APP_EXTENSION)) {
-							FileInfo infoFichero = new FileInfo(elemento.Name + APP_EXTENSION);
-							if (sysFicheros.tieneDatos(elemento.Name + APP_EXTENSION) && cbBorrarFicheros.Checked)
-								sysFicheros.borrarFichero(elemento.Name);
-							lstFicheros.Items.Remove(elemento);
-						}
+						if (sysFicheros.tieneDatos(elemento.Name + Constantes.APP_EXTENSION) && cbBorrarFicheros.Checked)
+							sysFicheros.borrarFichero(elemento.Name);
+						lstFicheros.Items.Remove(elemento);
+
 					} else {
 						Cifrador.DescifrarAES(elemento.Name, txtClave.Text);
 						string nombreFicheroOriginal = sysFicheros.quitaExtension(elemento.Name);
@@ -329,9 +322,9 @@ namespace SensibleInfo
 				intentarActivarBotonCifrado();
                 
 				if (modoCifrado())
-					lblBarraAvisoClave.Text = AVISO_CIFRADO_EXITO;
+					lblBarraAvisoClave.Text = Textos.AVISO_CIFRADO_EXITO;
 				else
-					lblBarraAvisoClave.Text = AVISO_DESCIFRADO_EXITO;
+					lblBarraAvisoClave.Text = Textos.AVISO_DESCIFRADO_EXITO;
 			}
 
 			strFallos.Clear();
@@ -372,11 +365,11 @@ namespace SensibleInfo
 		{
 			Internet web = new Internet();
 			try {             
-				int codigo = Convert.ToInt32(web.getWebResponse(URL_VERSION_ACTUAL));
-				if (codigo > version) {
+				int codigo = Convert.ToInt32(web.getWebResponse(Constantes.URL_VERSION_ACTUAL));
+				if (codigo > Constantes.APP_VERSION) {
 					if (dialogos.desicion("Hay una nueva versión disponible.\n\n¿Desea descargarla?", "Actualizar")) {
-						string rutaActualizador = sysFicheros.combinarRuta(SysFicheros.RUTA_DIR_APP, FICHERO_ACTUALIZADOR);
-						web.descargarFichero(URL_ACTUALIZADOR, rutaActualizador);
+						string rutaActualizador = sysFicheros.combinarRuta(SysFicheros.RUTA_DIR_APP, Constantes.FICHERO_ACTUALIZADOR);
+						web.descargarFichero(Constantes.URL_ACTUALIZADOR, rutaActualizador);
 						sysFicheros.ejecutar(rutaActualizador);
 						this.Close();
 					}

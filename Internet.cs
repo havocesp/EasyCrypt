@@ -7,7 +7,7 @@ using System.IO;
 using System.Windows.Forms;
 
 
-namespace SensibleInfo
+namespace EasyCrypt
 {
     class Internet
     {

@@ -19,7 +19,7 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 using System;
-using SensibleInfo;
+using EasyCrypt;
 using System.Windows.Forms;
 
 namespace EasyCrypt
@@ -30,7 +30,7 @@ namespace EasyCrypt
 		{
 		}
 
-		public string password(string strLabel = "Introduzca contraseña:", string strBoton = "Aceptar")
+		public string password(string strLabel = Textos.TEXTO_INTRO_PASS, string strBoton = Textos.BOTON_ACEPTAR)
 		{
 			DlgPassword dlgPass = new DlgPassword();
 			dlgPass.setTexto(strLabel);
@@ -43,7 +43,7 @@ namespace EasyCrypt
 			}
 		}
 
-		public void error(string strMensaje, string strTitulo = "Error")
+		public void error(string strMensaje, string strTitulo = Textos.TEXTO_ERROR)
 		{
 			MessageBox.Show(strMensaje, strTitulo, MessageBoxButtons.OK, MessageBoxIcon.Error);
 		}

@@ -225,5 +225,6 @@ Global
 		$39.NamingStyle = PascalCase
 		$39.IncludeInstanceMembers = True
 		$39.IncludeStaticEntities = True
+		outputpath = build
 	EndGlobalSection
 EndGlobal

@@ -21,12 +21,12 @@
 using System;
 using System.IO;
 using System.Diagnostics;
+using System.Data;
 
 namespace EasyCrypt
 {
 	public class SysFicheros
 	{
-
 		public static string RUTA_MIPC = Environment.GetFolderPath(Environment.SpecialFolder.MyComputer);
 		public static string RUTA_EJECUTABLE = System.Windows.Forms.Application.ExecutablePath;
 		public static string RUTA_DIR_APP = Path.GetDirectoryName(RUTA_EJECUTABLE);
@@ -80,7 +80,7 @@ namespace EasyCrypt
 
 		public void ejecutar(string strEjecutable)
 		{
-			Process proceso = new Process(strEjecutable).Start();
+			Process.Start(strEjecutable);
 		}
 	}
 }

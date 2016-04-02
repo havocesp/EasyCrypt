@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace SensibleInfo
+namespace EasyCrypt
 {
 	public partial class DlgPassword : Form
 	{
@@ -21,7 +21,7 @@ namespace SensibleInfo
 			if (txtClave.Text.Length > 0)
 				this.Close();
 			else
-				MessageBox.Show("Introduzca la clave para descifrar el fichero", "Clave no válida", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				MessageBox.Show(Textos.TEXTO_INTRO_PASS, Textos.TEXTO_PASS_INCORRECTA, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 		}
 
 		public string getClave()

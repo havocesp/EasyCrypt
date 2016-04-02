@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>EasyCrypt</RootNamespace>
-    <AssemblyName>SensibleInfo</AssemblyName>
+    <AssemblyName>EasyCrypt</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -23,15 +23,14 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ProductName>SensibleInfo</ProductName>
-    <PublisherName>SensibleInfo</PublisherName>
+    <ProductName>EasyCrypt</ProductName>
+    <PublisherName>EasyCrypt</PublisherName>
     <ApplicationRevision>1</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <StartupObject>SensibleInfo.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -121,7 +120,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
-    <None Include="CASET1_TemporaryKey.pfx" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -151,6 +149,8 @@
     <Compile Include="DlgPassword.Designer.cs">
       <DependentUpon>DlgPassword.cs</DependentUpon>
     </Compile>
+    <Compile Include="Constantes.cs" />
+    <Compile Include="Textos.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icono.ico" />
@@ -181,8 +181,8 @@
   <ItemGroup>
     <FileAssociation Include=".ssi">
       <Visible>False</Visible>
-      <Description>SensibleInfo</Description>
-      <Progid>SensibleInfo</Progid>
+      <Description>EasyCrypt</Description>
+      <Progid>EasyCrypt</Progid>
       <DefaultIcon>Icono.ico</DefaultIcon>
     </FileAssociation>
   </ItemGroup>

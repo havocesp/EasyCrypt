@@ -1,4 +1,4 @@
-﻿namespace SensibleInfo
+﻿namespace EasyCrypt
 {
 	partial class Principal
 	{

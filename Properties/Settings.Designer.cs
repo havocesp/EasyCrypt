@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SensibleInfo.Properties {
+namespace EasyCrypt {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
