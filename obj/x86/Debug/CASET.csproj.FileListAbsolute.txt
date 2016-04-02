@@ -1,0 +1,9 @@
+C:\Users\Usuario01\AppData\Local\Temporary Projects\CASET\bin\Debug\CASET.exe
+C:\Users\Usuario01\AppData\Local\Temporary Projects\CASET\bin\Debug\CASET.pdb
+C:\Users\Usuario01\AppData\Local\Temporary Projects\CASET\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Usuario01\AppData\Local\Temporary Projects\CASET\obj\x86\Debug\CASET.Form1.resources
+C:\Users\Usuario01\AppData\Local\Temporary Projects\CASET\obj\x86\Debug\CASET.Properties.Resources.resources
+C:\Users\Usuario01\AppData\Local\Temporary Projects\CASET\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Usuario01\AppData\Local\Temporary Projects\CASET\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Usuario01\AppData\Local\Temporary Projects\CASET\obj\x86\Debug\CASET.exe
+C:\Users\Usuario01\AppData\Local\Temporary Projects\CASET\obj\x86\Debug\CASET.pdb
