@@ -24,9 +24,4 @@ Se aceptan y se agradecen donaciones en cualquiera de los siguientes sistemas de
 * Paypal: mediante envíos a danielumpierrezdelrio@gmail.com
 * Skrill: mediante envíos a danielumpierrezdelrio@gmail.com
 
-## Capturas
-<<<<<<< HEAD
 ![Sreenshot 01](http://i1.wp.com/danielumpierrez.es/wp-content/uploads/2016/04/EasyCrypt.png)
-=======
-![Sreenshot 01](http://danielumpierrez.es/wp-content/uploads/2016/04/EasyCrypt_01.png)
->>>>>>> 2fde29da036243122f56a1fd8d09ad80ab4619dc
