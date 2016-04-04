@@ -1,16 +1,15 @@
 ﻿<Properties StartupItem="EasyCrypt.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="RegistroWindows.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Principal.cs">
     <Files>
-      <File FileName="Principal.cs" Line="325" Column="42" />
-      <File FileName="Textos.cs" Line="50" Column="38" />
-      <File FileName="RegistroWindows.cs" Line="16" Column="1" />
+      <File FileName="Principal.cs" Line="16" Column="39" />
+      <File FileName="Textos.cs" Line="24" Column="2" />
+      <File FileName="RegistroWindows.cs" Line="1" Column="1" />
+      <File FileName="Dialogos.cs" Line="43" Column="12" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <RunToCursorBreakpoint file="/home/havoc/software/Windows/EasyCrypt/AcercaDe.cs" line="77" column="21" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>

@@ -1,6 +1,0 @@
-/home/havoc/software/Windows/SensibleInfo/obj/x86/Debug/.NETFramework,Version=v4.0,Profile=Client.AssemblyAttribute.cs
-/home/havoc/software/Windows/SensibleInfo/obj/x86/Debug/SensibleInfo.AboutBox1.resources
-/home/havoc/software/Windows/SensibleInfo/obj/x86/Debug/SensibleInfo.frmClave.resources
-/home/havoc/software/Windows/SensibleInfo/obj/x86/Debug/SensibleInfo.Principal.resources
-/home/havoc/software/Windows/SensibleInfo/obj/x86/Debug/SensibleInfo.Properties.Resources.resources
-/home/havoc/software/Windows/SensibleInfo/obj/x86/Debug/SensibleInfo.exe

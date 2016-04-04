@@ -1,7 +1,0 @@
-/home/havoc/software/Windows/EasyCrypt/obj/x86/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
-/home/havoc/software/Windows/EasyCrypt/obj/x86/Debug/EasyCrypt.DlgPassword.resources
-/home/havoc/software/Windows/EasyCrypt/obj/x86/Debug/EasyCrypt.Principal.resources
-/home/havoc/software/Windows/EasyCrypt/obj/x86/Debug/EasyCrypt.Properties.Resources.resources
-/home/havoc/software/Windows/EasyCrypt/obj/x86/Debug/EasyCrypt.AcercaDe.resources
-/home/havoc/software/Windows/EasyCrypt/bin/Debug/EntityFramework.dll
-/home/havoc/software/Windows/EasyCrypt/bin/Debug/EntityFramework.SqlServer.dll

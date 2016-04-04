@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EasyCrypt {
+namespace EasyCrypt.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace EasyCrypt {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SensibleInfo.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EasyCrypt.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -60,9 +60,128 @@ namespace EasyCrypt {
             }
         }
         
-        public static System.Drawing.Icon Icono {
+        public static System.Drawing.Bitmap CandadoAbierto {
+            get {
+                object obj = ResourceManager.GetObject("CandadoAbierto", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        public static System.Drawing.Bitmap CandadoCerrado {
+            get {
+                object obj = ResourceManager.GetObject("CandadoCerrado", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        public static System.Drawing.Bitmap clave {
+            get {
+                object obj = ResourceManager.GetObject("clave", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        public static System.Drawing.Icon clave1 {
+            get {
+                object obj = ResourceManager.GetObject("clave1", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        public static System.Drawing.Bitmap docCifrado {
+            get {
+                object obj = ResourceManager.GetObject("docCifrado", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        public static System.Drawing.Icon docCifrado1 {
+            get {
+                object obj = ResourceManager.GetObject("docCifrado1", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        public static System.Drawing.Icon documento {
+            get {
+                object obj = ResourceManager.GetObject("documento", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        public static System.Drawing.Bitmap Documentos {
+            get {
+                object obj = ResourceManager.GetObject("Documentos", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        public static System.Drawing.Icon Documentos1 {
+            get {
+                object obj = ResourceManager.GetObject("Documentos1", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        public static System.Drawing.Bitmap empezar {
+            get {
+                object obj = ResourceManager.GetObject("empezar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        public static System.Drawing.Icon empezar1 {
+            get {
+                object obj = ResourceManager.GetObject("empezar1", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        public static System.Drawing.Icon fcheroCifrado {
+            get {
+                object obj = ResourceManager.GetObject("fcheroCifrado", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        public static System.Drawing.Bitmap Icono {
             get {
                 object obj = ResourceManager.GetObject("Icono", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        public static System.Drawing.Icon Icono1 {
+            get {
+                object obj = ResourceManager.GetObject("Icono1", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        public static System.Drawing.Icon llavero1 {
+            get {
+                object obj = ResourceManager.GetObject("llavero1", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        public static System.Drawing.Icon llavero2 {
+            get {
+                object obj = ResourceManager.GetObject("llavero2", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        public static System.Drawing.Bitmap llaves {
+            get {
+                object obj = ResourceManager.GetObject("llaves", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        public static System.Drawing.Icon llaves1 {
+            get {
+                object obj = ResourceManager.GetObject("llaves1", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }

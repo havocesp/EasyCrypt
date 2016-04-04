@@ -1,0 +1,10 @@
+C:\Users\Usuario01\Desktop\EasyCrypt\bin\Release\EasyCrypt.exe
+C:\Users\Usuario01\Desktop\EasyCrypt\bin\Release\EasyCrypt.pdb
+C:\Users\Usuario01\Desktop\EasyCrypt\obj\x86\Release\ResolveAssemblyReference.cache
+C:\Users\Usuario01\Desktop\EasyCrypt\obj\x86\Release\EasyCrypt.DlgPassword.resources
+C:\Users\Usuario01\Desktop\EasyCrypt\obj\x86\Release\EasyCrypt.Principal.resources
+C:\Users\Usuario01\Desktop\EasyCrypt\obj\x86\Release\EasyCrypt.Properties.Resources.resources
+C:\Users\Usuario01\Desktop\EasyCrypt\obj\x86\Release\GenerateResource.read.1.tlog
+C:\Users\Usuario01\Desktop\EasyCrypt\obj\x86\Release\GenerateResource.write.1.tlog
+C:\Users\Usuario01\Desktop\EasyCrypt\obj\x86\Release\EasyCrypt.exe
+C:\Users\Usuario01\Desktop\EasyCrypt\obj\x86\Release\EasyCrypt.pdb
