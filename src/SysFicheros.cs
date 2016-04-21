@@ -21,7 +21,7 @@
 using System;
 using System.IO;
 using System.Diagnostics;
-using System.Data;
+using EasyCrypt.src;
 
 namespace EasyCrypt
 {
@@ -30,12 +30,10 @@ namespace EasyCrypt
 		public static string RUTA_MIPC = Environment.GetFolderPath(Environment.SpecialFolder.MyComputer);
 		public static string RUTA_EJECUTABLE = System.Windows.Forms.Application.ExecutablePath;
 		public static string RUTA_DIR_APP = Path.GetDirectoryName(RUTA_EJECUTABLE);
+        public static string ESCRITORIO = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+        public static string MIS_DOCUMENTOS = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
-		public SysFicheros()
-		{
-		}
-
-		public bool borrarFichero(string strFichero)
+        public bool borrarFichero(string strFichero)
 		{
 			try {
 				if (File.Exists(strFichero)) {
@@ -47,6 +45,12 @@ namespace EasyCrypt
 			}
 			return true;
 		}
+
+        public bool borradoSeguro(string fichero)
+        {
+            BorradoGutmann gutmann = new BorradoGutmann();
+            return gutmann.borradoSeguroFichero(fichero);
+        }
 
 		public bool tieneDatos(string strFichero)
 		{

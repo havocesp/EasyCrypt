@@ -85,6 +85,7 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\BorradoGutmann.cs" />
     <Compile Include="src\Cifrador.cs" />
     <Compile Include="src\Internet.cs" />
     <Compile Include="Formularios\Principal.cs">

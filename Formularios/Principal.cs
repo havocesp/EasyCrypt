@@ -3,14 +3,7 @@ using System.IO;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using Microsoft.Win32;
-using System.Threading;
-using Microsoft.VisualBasic;
-using System.Diagnostics;
 using System.Threading.Tasks;
-using EasyCrypt;
-using EasyCrypt.Properties;
-using System.Resources;
 
 
 namespace EasyCrypt
@@ -27,12 +20,14 @@ namespace EasyCrypt
 
         private int anteriorX;
         private int anteriorY;
+        private bool hayActualizacion = false;
 
-		public Principal()
+
+        public Principal()
 		{
 
 			InitializeComponent();
-            this.MouseWheel += new MouseEventHandler(this.setTransparencia);
+            MouseWheel += new MouseEventHandler(setTransparencia_MouseWheel);
 			try {
 				RegistroWindows registro = new RegistroWindows(Constantes.APP_NOMBRE);
 				registro.addExplorerElementoMenu(Constantes.APP_EXTENSION , "Descifrar");
@@ -44,7 +39,7 @@ namespace EasyCrypt
 			dlgFicheros.InitialDirectory = SysFicheros.RUTA_MIPC;
 			lstImagenes.ImageSize = new Size(48, 48);
 			lstImagenes.ColorDepth = ColorDepth.Depth32Bit;
-			lstImagenes.Images.Add(Constantes.APP_EXTENSION, this.Icon);
+			lstImagenes.Images.Add(Constantes.APP_EXTENSION, Icon);
 			lstFicheros.View = View.LargeIcon;
 			lstFicheros.LargeImageList = lstImagenes;
 		}
@@ -63,9 +58,9 @@ namespace EasyCrypt
 		}
 
 		private void addFicheros(string fichero)
-		{ 
-			String[] ficheros = { fichero };
-			this.addFicheros(ficheros);
+		{
+            string[] ficheros = { fichero };
+            addFicheros(ficheros);
 		}
 
 		private void addFicheros(string[] ficheros)
@@ -74,8 +69,8 @@ namespace EasyCrypt
 			foreach (string fichero in ficheros) {
 				FileInfo infoFichero = new FileInfo(fichero);
 				if (!lstFicheros.Items.ContainsKey(infoFichero.FullName)) {
-					// icono por defecto
-					System.Drawing.Icon icono = SystemIcons.WinLogo;
+                    // icono por defecto
+                    Icon icono = SystemIcons.WinLogo;
 					lstFicheros.BeginUpdate();
 					// si la accion es cifrar
 					if (modoCifrado) {
@@ -91,7 +86,7 @@ namespace EasyCrypt
 						}
 					} else {
 						if (infoFichero.Extension == Constantes.APP_EXTENSION) {
-							icono = this.Icon;
+							icono = Icon;
 							if (!lstImagenes.Images.ContainsKey(infoFichero.Extension))
 								lstImagenes.Images.Add(infoFichero.Extension, icono);
 							lstFicheros.Items.Insert(lstFicheros.Items.Count, infoFichero.FullName, infoFichero.Name, infoFichero.Extension);
@@ -102,17 +97,16 @@ namespace EasyCrypt
 			}
 		}
 
-        void setTransparencia(object sernder, MouseEventArgs e)
+        void setTransparencia_MouseWheel(object sernder, MouseEventArgs e)
         {
             if (e.Delta > 0)
             {
-                if (this.Opacity <= 1)
-                    this.Opacity += 0.1;
+                if (Opacity <= 1)
+                    Opacity += 0.1;
             }  else {
-                if (this.Opacity >= 0.1)
-                    this.Opacity -= 0.1;
+                if (Opacity >= 0.1)
+                    Opacity -= 0.1;
             }
-             
         }
 
 		private void Principal_Load(object sender, EventArgs e)
@@ -120,23 +114,23 @@ namespace EasyCrypt
             lblBarraAvisoClave.Text = "Seleccione o arrastre ficheros para comenzar.";
             sysFicheros = new SysFicheros();
 			dialogos = new Dialogos();
-			this.AllowDrop = true;
+            AllowDrop = true;
 	
 			// Ficheros por la linea de comandos como argumentos (desde menu contextual)
 			if (Environment.GetCommandLineArgs().Length == 2) {
 				string fichero = Environment.GetCommandLineArgs()[1];
                 if (fichero.Contains(Constantes.APP_EXTENSION))
                 {
-                    this.modoCifrado = false;
+                    modoCifrado = false;
                 }
-                this.clave = dialogos.password(this.modoCifrado);
+                clave = dialogos.password(modoCifrado);
                 addFicheros(fichero);
-                realizarAccion(lstFicheros.Items); 
-				this.Close();
+                realizarAccion(lstFicheros.Items);
+                Close();
 			}
 			sysFicheros.borrarFichero(sysFicheros.combinarRuta(SysFicheros.RUTA_DIR_APP, Constantes.FICHERO_ACTUALIZADOR));
             new Task(comprobarActualizaciones).Start();
-		}
+        }
 
 		private void Principal_DragDrop(object sender, DragEventArgs e)
 		{
@@ -153,7 +147,6 @@ namespace EasyCrypt
 					}                  
 				}
 			}
-
 		}
 
 		private void Principal_DragEnter(object sender, DragEventArgs e)
@@ -175,7 +168,7 @@ namespace EasyCrypt
 
 		private void lstFicheros_MouseClick(object sender, MouseEventArgs e)
 		{
-			if (e.Button == System.Windows.Forms.MouseButtons.Right && lstFicheros.SelectedItems.Count > 0) {
+			if (e.Button == MouseButtons.Right && lstFicheros.SelectedItems.Count > 0) {
                 if (clave.Length > 0)
                 {
                     cifrarToolStripMenuItem.Enabled = true;
@@ -188,7 +181,7 @@ namespace EasyCrypt
                 {
                     cifrarToolStripMenuItem.Enabled = false;
                 }
-				menuListaFicheros.Show(Control.MousePosition.X, Control.MousePosition.Y);
+				menuListaFicheros.Show(MousePosition.X, MousePosition.Y);
 			}
 		}
 
@@ -223,20 +216,26 @@ namespace EasyCrypt
             {
                 if (modoCifrado)
                 {
-                    Cifrador.CifrarAES(elemento.Name, this.clave);
+                    Cifrador.CifrarAES(elemento.Name, clave);
                     if (sysFicheros.tieneDatos(elemento.Name + Constantes.APP_EXTENSION))
-                        sysFicheros.borrarFichero(elemento.Name);
+                        if (chkBorradoSeguro.Checked)
+                            sysFicheros.borradoSeguro(elemento.Name);
+                        else
+                            sysFicheros.borrarFichero(elemento.Name);
                     lstFicheros.Items.Remove(elemento);
                     btnProcesar.Enabled = false;
                 }
                 else
                 {
-                    Cifrador.DescifrarAES(elemento.Name, this.clave);
+                    Cifrador.DescifrarAES(elemento.Name, clave);
                     string nombreFicheroOriginal = sysFicheros.quitaExtension(elemento.Name);
 
                     if (sysFicheros.tieneDatos(nombreFicheroOriginal))
                     {
-                        sysFicheros.borrarFichero(elemento.Name);
+                        if (chkBorradoSeguro.Checked)
+                            sysFicheros.borradoSeguro(elemento.Name);
+                        else
+                            sysFicheros.borrarFichero(elemento.Name);
                         lstFicheros.Items.Remove(elemento);
                         btnProcesar.Enabled = false;
                     }
@@ -277,24 +276,19 @@ namespace EasyCrypt
             return exito;
 		}
 
-		private Boolean hayClave()
+		private bool hayClave()
 		{
-            return (this.clave.Length > 0);
+            return (clave.Length > 0);
 		}
 
 		private void comprobarActualizaciones()
 		{
-			Internet web = new Internet();
-			try {             
+            Internet web = new Internet();
+            try {             
 				int codigo = Convert.ToInt32(web.getWebResponse(Constantes.URL_VERSION_ACTUAL));
 				if (Constantes.APP_VERSION < codigo) {
-					if (dialogos.desicion("Hay una nueva versión disponible.\n\n¿Desea descargarla?", "Actualizar")) {
-						string rutaActualizador = sysFicheros.combinarRuta(SysFicheros.RUTA_DIR_APP, Constantes.FICHERO_ACTUALIZADOR);
-						web.descargarFichero(Constantes.URL_ACTUALIZADOR, rutaActualizador);
-						sysFicheros.ejecutar(rutaActualizador);
-						this.Close();
-					}
-				}
+                    hayActualizacion = true;                    
+                }
 			} catch (Exception ex) {
 				dialogos.error(ex.Message, Textos.TEXTO_ERROR);
 			}        
@@ -311,7 +305,7 @@ namespace EasyCrypt
                     modoCifrado = false;
                     dlgFicheros.Filter = "Ficheros cifrados con SensibleInfo|*" + Constantes.APP_EXTENSION;
                 
-                    btnModo.Image = global::EasyCrypt.Properties.Resources.CandadoAbierto;
+                    btnModo.Image = Properties.Resources.CandadoAbierto;
                 }
                 else
                 {
@@ -319,7 +313,7 @@ namespace EasyCrypt
                     modoCifrado = true;
                     dlgFicheros.Filter = "Todos los ficheros|*";
                    
-                    btnModo.Image = global::EasyCrypt.Properties.Resources.CandadoCerrado;
+                    btnModo.Image = Properties.Resources.CandadoCerrado;
                 }
                 lstFicheros.Items.Clear();
                 lblArrastrar.Visible = true;
@@ -336,7 +330,7 @@ namespace EasyCrypt
 
         private void btnProcesar_Click(object sender, EventArgs e)
         {
-            if (this.clave.Length > 0)
+            if (clave.Length > 0)
             {
                 if (realizarAccion(lstFicheros.Items))
                 {
@@ -356,7 +350,9 @@ namespace EasyCrypt
 
         private void btnClave_Click(object sender, EventArgs e)
         {
-            this.clave = dialogos.password(this.modoCifrado);
+            double opacidadPrevia = Opacity;
+            Opacity = 0.1;
+            clave = dialogos.password(modoCifrado);
             if (clave.Length > 0)
             {
                 btnProcesar.Enabled = true;
@@ -366,11 +362,12 @@ namespace EasyCrypt
                 btnProcesar.Enabled = false ;
             }
             lblBarraAvisoClave.Text = "";
+            Opacity= opacidadPrevia;
         }
 
         private void label1_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
 
@@ -387,16 +384,38 @@ namespace EasyCrypt
         private void moverVentana() {
             if (MouseButtons.HasFlag(MouseButtons.Left))
             {
-                this.Left = MousePosition.X - anteriorX;
-                this.Top = MousePosition.Y - anteriorY;
+                Left = MousePosition.X - anteriorX;
+                Top = MousePosition.Y - anteriorY;
                 
             }
             else
             {
-                anteriorX = (MousePosition.X - (this.Left));
-                anteriorY = (MousePosition.Y - (this.Top));
+                anteriorX = (MousePosition.X - (Left));
+                anteriorY = (MousePosition.Y - (Top));
             }
         }
 
-	}
+        private void tmpActualizaciones_Tick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (hayActualizacion)
+                {
+                    tmpActualizaciones.Enabled = false;
+                    double opacidadPrevia = Opacity;
+                    Opacity = 0.1;
+                    if (dialogos.desicion("Hay una nueva versión disponible.\n\n¿Desea descargarla?", "Actualizar"))
+                    {
+                        Internet web = new Internet();
+                        string rutaActualizador = sysFicheros.combinarRuta(SysFicheros.RUTA_DIR_APP, Constantes.FICHERO_ACTUALIZADOR);
+                        web.descargarFichero(Constantes.URL_ACTUALIZADOR, rutaActualizador);
+                        sysFicheros.ejecutar(rutaActualizador);
+                        Close();
+                    }
+                    Opacity = opacidadPrevia;
+                }
+            }
+            catch (Exception) { }
+        }
+    }
 }

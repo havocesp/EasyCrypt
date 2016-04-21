@@ -24,7 +24,7 @@ namespace EasyCrypt
 {
 	public class Constantes
 	{
-		public static int APP_VERSION = 101;
+		public static int APP_VERSION = 103;
 
 		public static string APP_EXTENSION = ".ssi";
 		public static string APP_NOMBRE = "EasyCrypt";
