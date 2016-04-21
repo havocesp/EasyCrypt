@@ -44,6 +44,9 @@
             this.btnProcesar = new System.Windows.Forms.Button();
             this.btnModo = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.chkBorradoSeguro = new System.Windows.Forms.CheckBox();
+            this.tpBorradoSeguro = new System.Windows.Forms.ToolTip(this.components);
+            this.tmpActualizaciones = new System.Windows.Forms.Timer(this.components);
             this.barraEstado.SuspendLayout();
             this.menuListaFicheros.SuspendLayout();
             this.SuspendLayout();
@@ -79,7 +82,7 @@
             // 
             this.lstFicheros.Location = new System.Drawing.Point(12, 105);
             this.lstFicheros.Name = "lstFicheros";
-            this.lstFicheros.Size = new System.Drawing.Size(420, 315);
+            this.lstFicheros.Size = new System.Drawing.Size(420, 303);
             this.lstFicheros.TabIndex = 11;
             this.lstFicheros.UseCompatibleStateImageBehavior = false;
             this.lstFicheros.KeyUp += new System.Windows.Forms.KeyEventHandler(this.lstFicheros_KeyUp);
@@ -102,9 +105,9 @@
             // 
             this.lblBarraAvisoClave.AutoSize = false;
             this.lblBarraAvisoClave.BackColor = System.Drawing.Color.White;
-            this.lblBarraAvisoClave.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top)
-                        | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)
-                        | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+            this.lblBarraAvisoClave.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
             this.lblBarraAvisoClave.BorderStyle = System.Windows.Forms.Border3DStyle.Adjust;
             this.lblBarraAvisoClave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.lblBarraAvisoClave.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -118,9 +121,9 @@
             // 
             this.linkEnlaceWeb.AutoSize = false;
             this.linkEnlaceWeb.BackColor = System.Drawing.Color.White;
-            this.linkEnlaceWeb.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top)
-                        | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right)
-                        | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
+            this.linkEnlaceWeb.BorderSides = ((System.Windows.Forms.ToolStripStatusLabelBorderSides)((((System.Windows.Forms.ToolStripStatusLabelBorderSides.Left | System.Windows.Forms.ToolStripStatusLabelBorderSides.Top) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
+            | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
             this.linkEnlaceWeb.BorderStyle = System.Windows.Forms.Border3DStyle.Adjust;
             this.linkEnlaceWeb.Font = new System.Drawing.Font("Cambria", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.linkEnlaceWeb.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -143,7 +146,7 @@
             this.lblArrastrar.Size = new System.Drawing.Size(343, 40);
             this.lblArrastrar.TabIndex = 14;
             this.lblArrastrar.Text = "Tambien puedes arrastrar aquí directorios\r\no ficheros para cifrar / descifrar ..." +
-                "";
+    "";
             this.lblArrastrar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // menuListaFicheros
@@ -254,12 +257,39 @@
             this.label1.Text = "X";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
+            // chkBorradoSeguro
+            // 
+            this.chkBorradoSeguro.AutoSize = true;
+            this.chkBorradoSeguro.Checked = true;
+            this.chkBorradoSeguro.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkBorradoSeguro.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkBorradoSeguro.ForeColor = System.Drawing.Color.Maroon;
+            this.chkBorradoSeguro.Location = new System.Drawing.Point(13, 408);
+            this.chkBorradoSeguro.Name = "chkBorradoSeguro";
+            this.chkBorradoSeguro.Size = new System.Drawing.Size(327, 17);
+            this.chkBorradoSeguro.TabIndex = 20;
+            this.chkBorradoSeguro.Text = "Usar borrado seguro del archivo original.  (más lento)";
+            this.tpBorradoSeguro.SetToolTip(this.chkBorradoSeguro, "No se podrá recuperar los ficheros originales.");
+            this.chkBorradoSeguro.UseVisualStyleBackColor = true;
+            // 
+            // tpBorradoSeguro
+            // 
+            this.tpBorradoSeguro.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.tpBorradoSeguro.ToolTipTitle = "ATENCIÓN";
+            // 
+            // tmpActualizaciones
+            // 
+            this.tmpActualizaciones.Enabled = true;
+            this.tmpActualizaciones.Interval = 1000;
+            this.tmpActualizaciones.Tick += new System.EventHandler(this.tmpActualizaciones_Tick);
+            // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.AliceBlue;
             this.ClientSize = new System.Drawing.Size(443, 452);
+            this.Controls.Add(this.chkBorradoSeguro);
             this.Controls.Add(this.barraEstado);
             this.Controls.Add(this.lblArrastrar);
             this.Controls.Add(this.label1);
@@ -312,6 +342,9 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripStatusLabel linkEnlaceWeb;
         private System.Windows.Forms.Label label1;
-	}
+        private System.Windows.Forms.CheckBox chkBorradoSeguro;
+        private System.Windows.Forms.ToolTip tpBorradoSeguro;
+        private System.Windows.Forms.Timer tmpActualizaciones;
+    }
 }
 
