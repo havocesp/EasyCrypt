@@ -3,27 +3,35 @@ using System.IO;
 
 namespace EasyCrypt.src
 {
-    class BorradoGutmann
+
+	/// <summary>
+	/// Clase encargada de realizar el borrado seguro de los ficheros mediante el algoritmo de Gutmann.
+	/// </summary>
+	class BorradoGutmann : Textos
     {
-        //set the block size we going to work with. Setting it higher sometimes impacts negatively on the performance.
+        //establece el tamaño de bloque con el que se va a trabajar. Normalmente los bloques mayores de 8192 afectan al rendimiento.
         internal const int tamBloque = 8192;
 
-        //Initialize random number generation
+        //Inicializa la semilla de números pseudo-aleatorios.
         static Random aleatorio = new Random();
 
+		/// <summary>
+		/// Borra de forma "segura" el contenido del fichero cuya ruta se pasa como argumento.
+		/// </summary>
+		/// <returns><c>true</c>, si el fichero fue borrado correctamente, de lo contrario<c>false</c>.</returns>
+		/// <param name="fichero">Ruta al fichero que se desea eliminar.</param>
+
+		// TO-DO: cambiar el nombre al fichero con uno aleatorio y moverlo de sitio (varias veces)	
         public bool borradoSeguroFichero(string fichero)
         {
             bool resultado = false;
-            if (fichero != "")
+			if (fichero != Textos.BL && File.Exists(fichero))
             {
-                if (File.Exists(fichero))
-                {
-                   
                     FileInfo infoFichero = new FileInfo(fichero);
 
                     byte byteSelect = 0x00;
 
-                    //Algoritmo de borrado seguro Gutman
+					//Algoritmo de borrado seguro Gutman (35 pasadas)
                     for (int j = 0; j < 35; j++)
                     {
                         switch (j)
@@ -81,52 +89,56 @@ namespace EasyCrypt.src
                                 byteSelect = 0x00;
                                 break;
                             case 28:
-
                                 gutmannBytePass(infoFichero, 0x6d, 0xb6, 0xdb);
                                 break;
                             case 29:
-
                                 gutmannBytePass(infoFichero, 0xb6, 0xdb, 0x6d);
                                 break;
                             case 30:
-
                                 gutmannBytePass(infoFichero, 0xdb, 0x6d, 0xb6);
                                 break;
                             case 31:
                             case 32:
                             case 33:
                             case 34:
-
                                 randomBytePass(infoFichero);
                                 break;
                         }
                     }
-
+					// Tras realizar las pasadas borramos el fichero de forma normal.
                     File.Delete(infoFichero.FullName);
                     resultado = true;
                 }
-            }
+            
             return resultado;
         }
 
-        private void bytePass(FileInfo fileInf, byte useByte)
-        {
-          
-            long tamFichero = fileInf.Length;
+		/// <summary>
+		/// Sobrescribre el fichero con el valor uByte.
+		/// </summary>
+		/// <param name="fileInf">Objeto FileInfo con información del fichero que se esta eliminando.</param>
+		/// <param name="useByte">Valor con el que se hara la pasada sobre el fichero.</param>
+		private void bytePass(FileInfo infoFichero, byte uByte)
+        {          
+            long tamFichero = infoFichero.Length;
             int ultimoBloque = (int)(tamFichero % tamBloque);
             byte[] bytes = new byte[tamBloque];
             byte[] bytesUltimoBloque = new byte[ultimoBloque];
             long modWrite = (int)(tamFichero / tamBloque);
+
+			// Pasada en sentido
             for (int i = 0; i < tamBloque; i++)
             {
-                bytes[i] = useByte;
-            }
-            for (int i = 0; i < ultimoBloque; i++)
-            {
-                bytesUltimoBloque[i] = useByte;
+                bytes[i] = uByte;
             }
 
-            Stream st = File.OpenWrite(fileInf.FullName);
+			// Y ahora en el inverso
+            for (int i = 0; i < ultimoBloque; i++)
+            {
+                bytesUltimoBloque[i] = uByte;
+            }
+
+            Stream st = File.OpenWrite(infoFichero.FullName);
             for (long i = 0; i < modWrite; i++)
             {
                 st.Write(bytes, 0, tamBloque);

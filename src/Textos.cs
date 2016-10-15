@@ -2,9 +2,9 @@
 //  Textos.cs
 //
 //  Author:
-//       havoc <>
+//       Daniel Umpiérrez Del Río
 //
-//  Copyright (c) 2016 havoc
+//  Copyright (c) 2016 Daniel Umpiérrez Del Río
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -18,10 +18,15 @@
 //
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
 using System;
 
 namespace EasyCrypt
 {
+	/// <summary>
+	/// Textos extraidos de la aplicación con el fin de facilitar la traducción a otras lenguas.
+	/// </summary>
 	public static class Textos
 	{
 		public static string BL = "";
@@ -44,6 +49,8 @@ namespace EasyCrypt
 		public static string TEXTO_ERROR = "Error";
 		public static string TEXTO_INTRO_PASS = "Introduzca contraseña:";
 		public static string TEXTO_PASS_INCORRECTA = "Clave no válida";
+		public static string TEXTO_CIFRAR = "cifrar";
+		public static string TEXTO_DESCIFRAR = "descifrar";
 
 		public static string BOTON_CERRAR = "&Cerrar";
 		public static string BOTON_ACEPTAR = "&Aceptar";

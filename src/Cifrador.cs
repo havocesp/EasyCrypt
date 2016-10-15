@@ -1,4 +1,25 @@
-﻿using System;
+﻿//
+//  Cifrador.cs
+//
+//  Author:
+//       Daniel J. Umpiérrez Del Río
+//
+//  Copyright (c) 2016 Daniel J. Umpiérrez Del Río
+//
+//  This program is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Linq;
@@ -7,14 +28,28 @@ using System.IO;
 
 namespace EasyCrypt
 {
+	/// <summary>
+	/// Clase encargada de las operaciones de cifrado de datos.
+	/// </summary>
 	class Cifrador
 	{
+		/// <summary>
+		/// Objeto encargado de los tan necesarios números aleatorios en el mundo de la seguridad.
+		/// </summary>
 		private static Random aleatorio = new Random((int)DateTime.Now.Ticks);
 
+		/// <summary>
+		/// Inicializa una nueva instancia de la clase <see cref="EasyCrypt.Cifrador"/>.
+		/// </summary>
 		public Cifrador()
 		{ 
 		}
 
+		/// <summary>
+		/// Genera una clave aleatoria y la devuelve en formato String.
+		/// </summary>
+		/// <returns>String con la clave una vez generada</returns>
+		/// <param name="longitud">Longitud de la contraseña medida en caracteres.</param>
 		public string genClave(int longitud)
 		{
 			StringBuilder strConstructor = new StringBuilder();
@@ -26,6 +61,12 @@ namespace EasyCrypt
 			return strConstructor.ToString();
 		}
 
+		/// <summary>
+		/// Cifra el fichero que se encuentra en la ruta pasada como argumento usando el algoritmo AES.
+		/// </summary>
+		/// <returns><c>true</c>, si el fichero fue cigrado correctamente, de lo contrario ... <c>false</c>.</returns>
+		/// <param name="strFichero">String fichero.</param>
+		/// <param name="strClave">String clave usada para el cifrado.</param>
 		public static Boolean CifrarAES(string strFichero, string strClave)
 		{
 			Boolean resultado = false;
@@ -60,7 +101,12 @@ namespace EasyCrypt
 			return resultado;
 		}
 
-
+		/// <summary>
+		/// Descifra un fichero del cual sabemos la ruta (primer argumento) y la clave con la que fue cifrado.
+		/// </summary>
+		/// <returns><c>true</c>, if AE was descifrared, <c>false</c> otherwise.</returns>
+		/// <param name="strFicheroCifrado">String ruta al fichero cifrado.</param>
+		/// <param name="strClave">String clave utilizada en el cifrado.</param>
 		public static Boolean DescifrarAES(string strFicheroCifrado, string strClave)
 		{
 			Boolean resultado = false;
@@ -111,6 +157,11 @@ namespace EasyCrypt
 			return resultado;
 		}
 
+		/// <summary>
+		/// Codifica un hash SHA1 en Base64.
+		/// </summary>
+		/// <returns>La cadena ya codificada en base64.</returns>
+		/// <param name="texto">Texto con el hash en SHA1.</param>
 		public static string SHA1toBase64(string texto)
 		{
 			SHA1CryptoServiceProvider sha = new SHA1CryptoServiceProvider();

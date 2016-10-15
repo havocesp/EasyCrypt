@@ -1,10 +1,10 @@
 ﻿//
-//  EmptyClass.cs
+//  SysFicheros.cs
 //
 //  Author:
-//       havoc <>
+//       Daniel J. Umpiérrez Del Río
 //
-//  Copyright (c) 2016 havoc
+//  Copyright (c) 2016 Daniel J. Umpiérrez Del Río
 //
 //  This program is free software: you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -18,6 +18,7 @@
 //
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using System;
 using System.IO;
 using System.Diagnostics;
